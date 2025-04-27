@@ -1,0 +1,31 @@
+Resources:
+  EmployeeTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: EmployeeTable
+      AttributeDefinitions:
+        - AttributeName: "employeeId"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "employeeId"
+          KeyType: "HASH"
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+  EmployeeLambda:
+    Type: AWS::Lambda::Function
+    Properties:
+      Handler: index.lambda_handler
+      Role: arn:aws:iam::YOUR_ACCOUNT_ID:role/LambdaExecutionRole
+      FunctionName: EmployeeAPIHandler
+      Code:
+        S3Bucket: "your-bucket-name"
+        S3Key: "your-lambda-code.zip"
+      Runtime: python3.8
+      Timeout: 60
+
+  EmployeeAPI:
+    Type: AWS::ApiGateway::RestApi
+    Properties:
+      Name: EmployeeAPI
