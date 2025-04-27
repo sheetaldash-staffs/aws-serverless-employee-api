@@ -2,7 +2,7 @@ import boto3
 from faker import Faker
 
 # Initialize AWS DynamoDB resource and Faker
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1')  # Ensure region is correct
+dynamodb = boto3.resource('dynamodb', region_name='eu-north-1')  # Ensure region is correct
 table = dynamodb.Table('Employees')  # Name of the table created in DynamoDB
 fake = Faker()
 
